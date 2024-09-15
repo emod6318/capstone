@@ -5,6 +5,8 @@
     <title>main</title>
 </head>
 <body>
-    session 값 확인: <p th:text="${session.loginEmail}"> </p>
+    <!--현재 로그인: <a th:href="@{|/member/${member.id}|}"><p th:text="${session.loginEmail}"> </p></a> -->
+    현재 로그인: <a th:href="@{|/member/${member.id}|}"><p th:text="${session.loginEmail}"> </p></a>
+    <a href="/member/update">내 정보 수정</a>
 </body>
 </html>
