@@ -19,5 +19,8 @@
     <td th:text="${member.memberName}"></td>
   </tr>
 </table>
+  <a href="/member/logout">로그아웃</a>
+  <a href="/member/update">내 정보 수정</a>
+  <a th:href="@{|/member/delete/${member.id}|}">회원 삭제</a>
 </body>
 </html>
