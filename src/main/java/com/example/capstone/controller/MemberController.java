@@ -54,13 +54,24 @@ public class MemberController {
         if (loginResult != null){
             // 로그인 성공
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
-            model.addAttribute("member", loginResult);
-            return "main";
+            session.setAttribute("loginMember", loginResult); //추가
+//            model.addAttribute("member", loginResult);
+//            return "main";
+            return "redirect:/main";
+
         } else {
             // 로그인 실패
             return "login";
         }
     }
+
+//    @GetMapping("/main")
+//    public String main(@ModelAttribute MemberDTO memberDTO, HttpSession session, Model model) {
+//        MemberDTO loginEmail = (MemberDTO) session.getAttribute("loginMember");
+//        model.addAttribute("member", loginEmail);
+//        return "main"; // 메인 페이지로 이동
+//    }
+
 
     // 회원 상세 정보
     @GetMapping("/member/{id}")
@@ -99,3 +110,5 @@ public class MemberController {
         return "index";
     }
 }
+
+

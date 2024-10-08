@@ -1,27 +1,88 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8"/>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-    <script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/makeToDo.css}">
 
-        document.addEventListener('DOMContentLoaded', function() {
-          var calendarEl = document.getElementById('calendar');
-          var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth'
-          });
-          calendar.render();
-        });
-
-    </script>
     <title>main</title>
 </head>
 <body>
 <!-- 현재 로그인 -->
-    <a th:href="@{|/member/${member.id}|}"><p th:text="${session.loginEmail}"> </p></a>
-    <div id='calendar'></div>
+<nav id="nav">
+    <a th:href="@{|/member/${member.id}|}"><p th:text="${session.loginEmail}"></p></a>
+</nav>
+<!-- 카테고리 -->
+<section id="menu">
+    <h3>카테고리</h3>
+</section>
+<!-- 캘린더 -->
+<div id="container">
+    <div id="calendar"></div>
+    <div id="todo_container">
+        <p>일정</p>
+        <button type="button" class="makeToDoModalOpenBtn">일정추가</button>
+        <h3 class="chooseDay"></h3>
+    </div>
+</div>
 
+<!--    모달 -->
+<div id="makeToDoModal" class="modal">
+    <form id="addToDoForm" action="/main" method="post">
+        <div id="modal-content">
+            <button type="button" class="makeToDoModalCloseBtn">닫기</button>
+            <button type="submit" class="makeToDoModalSaveBtn">저장</button>
+            <div class="modal-detail-content">
+                <label for="title" class="form-label">제목</label>
+                <input type="text" class="form-control" id="title" name="toDoTitle" required>
+            </div>
+            <div class="modal-detail-content">
+                <label for="category" class="form-label">카테고리</label>
+                <select id="category" class="form-control" required>
+                    <option>1</option>
+                </select>
+            </div>
+            <div class="modal-detail-content">
+                <label for="start" class="form-label">시작 일자</label>
+                <input type="datetime-local" class="form-control" id="start" name="toDoStart" required>
+            </div>
+            <div class="modal-detail-content">
+                <label for="end" class="form-label">종료 일자</label>
+                <input type="datetime-local" class="form-control" id="end" name="toDoEnd" required>
+            </div>
+            <div class="modal-detail-content">
+                <label for="content" class="form-label">내용</label>
+                <input type="text" class="form-control" id="content" name="toDoContent" required>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    // 모달 생성
+    const modalOpen = document.querySelector('.makeToDoModalOpenBtn');
+    const modalClose = document.querySelector('.makeToDoModalCloseBtn');
+    const modalSave = document.querySelector('.makeToDoModalSaveBtn');
+    const modal = document.querySelector('.modal');
+
+
+    // 열기 버튼을 눌렀을 때 모달팝업이 열림
+    modalOpen.addEventListener('click',function(){
+        //'on' class 추가
+        modal.classList.add('on');
+    });
+    // 닫기 버튼을 눌렀을 때 모달팝업이 닫힘
+    modalClose.addEventListener('click',function(){
+        //'on' class 제거
+        modal.classList.remove('on');
+    });
+    // 저장 버튼을 눌렀을 때 모달팝업이 닫힘
+    modalSave.addEventListener('click',function(){
+        //'on' class 제거
+        modal.classList.remove('on');
+    });
+</script>
 
 </body>
 </html>
