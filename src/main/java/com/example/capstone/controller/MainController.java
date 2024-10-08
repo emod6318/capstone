@@ -1,7 +1,7 @@
 package com.example.capstone.controller;
 
 import com.example.capstone.dto.MemberDTO;
-import com.example.capstone.dto.TodoDTO
+import com.example.capstone.dto.TodoDTO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,10 +23,11 @@ public class MainController {
         return "main"; // 메인 페이지로 이동
     }
 
-  @PostMapping("/main")
-  public String login(@ModelAttribute TodoDTO todoDTO, HttpSession session, Model model) {
-
-    }
+//  @PostMapping("/main")
+//  public String login(@ModelAttribute TodoDTO todoDTO, HttpSession session, Model model) {
+//
+//        return ;
+//    }
 
 
 
